@@ -109,16 +109,14 @@ export default function TabOneScreen({
   const [show, setShow] = useState(false);
 
   const submitDate = (event: any, selectedDate: any) => {
-    console.log("date now is : " + Date.now());
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
-    console.log("current date is " + selectedDate);
     if (mode === "date") {
       showTimePicker();
     } else if (mode === "time") {
       if (currentDate < Date.now()) {
-        console.log("the selected date must be forward in time from now!");
+        Toast.show('the selected date must be some time in the future!', toastconfig);
         return;
       }
       const currentDateString = currentDate.toString();
@@ -126,9 +124,7 @@ export default function TabOneScreen({
       const firstSection = dateSections.slice(0, 4);
       const secondSection = dateSections.slice(4);
       const formattedDate = "Set for: " + firstSection.join(' ') + " at " + secondSection;
-      console.log(formattedDate);
       scheduleNotification(currentDate, text).then((notificationid) => {
-        console.log("here is the note identifier" + notificationid);
         database
           .insertTodo(text, notificationid, formattedDate)
           .then(() => {
@@ -206,7 +202,6 @@ export default function TabOneScreen({
             styles.button,
           ]}
           onPress={() => {
-            console.log("showing date picker");
             showDatepicker();
           }}
         >

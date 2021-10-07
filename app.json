@@ -4,7 +4,7 @@
     "slug": "penelope-creative-assistant",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/penelope-logo",
+    "icon": "./assets/images/penelope-logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "dark",
     "splash": {
@@ -15,19 +15,19 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "githubUrl":"https://github.com/TyrelN/penelope-journal",
+    "githubUrl":"https://github.com/TyrelN/penelope",
 
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier":"com.tyapps.penelopejournal",
+      "bundleIdentifier":"com.tyapps.penelope",
       "buildNumber":"1.0.0",
       "supportsTablet": true,
       "userInterfaceStyle": "dark"
     },
     "android": {
-      "package":"com.tyapps.penelopejournal",
+      "package":"com.tyapps.penelope",
       "versionCode":1,
       "softwareKeyboardLayoutMode": "pan",
       "userInterfaceStyle": "dark",
@@ -41,7 +41,7 @@
       "backgroundColor": "#F09383"
     },
     "notification":{
-        "icon": "./assets/images/icon.png",
+        "icon": "./assets/images/penelope-logo.png",
         "color": "#1C1E26"
     },
     "web": {
