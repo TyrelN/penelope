@@ -13,10 +13,15 @@ declare global {
   }
 }
 
+export const USE_NATIVE_DRIVER = true;
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
+  CreateEntry: undefined;
+  CreateTodo: undefined;
+  PhotoDetail: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -25,9 +30,13 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  TodoTab: undefined;
+  JournalTab: undefined;
+  PhotoTab: undefined;
+
 };
+
+//export type Props = NativeStackScreenProps<RootStackParamList, 'JournalTab'>;
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,

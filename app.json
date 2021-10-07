@@ -1,34 +1,51 @@
 {
   "expo": {
-    "name": "penelope-journal",
-    "slug": "penelope-journal",
+    "name": "Penelope",
+    "slug": "penelope-creative-assistant",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/penelope-logo",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/penelope_splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1C1E26"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "githubUrl":"https://github.com/TyrelN/penelope-journal",
+
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier":"com.tyapps.penelopejournal",
+      "buildNumber":"1.0.0",
+      "supportsTablet": true,
+      "userInterfaceStyle": "dark"
     },
     "android": {
+      "package":"com.tyapps.penelopejournal",
+      "versionCode":1,
+      "softwareKeyboardLayoutMode": "pan",
+      "userInterfaceStyle": "dark",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/penelope-logo.png",
+        "backgroundColor": "#1C1E26"
       }
     },
+    "androidStatusBar":{
+      "barStyle": "dark-content",
+      "backgroundColor": "#F09383"
+    },
+    "notification":{
+        "icon": "./assets/images/icon.png",
+        "color": "#1C1E26"
+    },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/penelope_favicon.png"
     }
   }
 }

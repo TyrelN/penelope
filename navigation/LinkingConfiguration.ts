@@ -15,22 +15,28 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          TodoTab: {
             screens: {
               TabOneScreen: 'one',
             },
           },
-          TabTwo: {
+          JournalTab: {
             screens: {
-              TabTwoScreen: 'two',
+              TabThreeScreen: 'two',
             },
           },
+          PhotoTab: {
+            screens: {
+              TabThreeScreen: 'three',
+              PhotoDetailScreen: 'photoDetail',
         },
       },
-      Modal: 'modal',
-      NotFound: '*',
     },
   },
+      Modal: 'modal',
+      NotFound: '*',
+    
+  },
+},
 };
-
 export default linking;
