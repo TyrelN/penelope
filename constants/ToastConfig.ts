@@ -1,6 +1,6 @@
 import Toast from 'react-native-root-toast';
 
-export const toastconfig = {
+export const toastConfig = {
     duration: Toast.durations.LONG,
     position: Toast.positions.TOP,
     shadow: true,

@@ -18,7 +18,7 @@ import { database } from "../components/Database";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {horizon} from '../constants/Colors';
 import Toast from 'react-native-root-toast';
-import { toastconfig } from '../constants/ToastConfig';
+import { toastConfig } from '../constants/ToastConfig';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -98,7 +98,7 @@ export default function TabOneScreen({
 
   const removeItem = (id: number) => {
     database.removeItem(id).then(() => {
-      Toast.show('Todo removed',toastconfig);
+      Toast.show('Todo removed',toastConfig);
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
     });
   };
@@ -116,7 +116,7 @@ export default function TabOneScreen({
       showTimePicker();
     } else if (mode === "time") {
       if (currentDate < Date.now()) {
-        Toast.show('the selected date must be some time in the future!', toastconfig);
+        Toast.show('the selected date must be some time in the future!', toastConfig);
         return;
       }
       const currentDateString = currentDate.toString();
@@ -128,7 +128,7 @@ export default function TabOneScreen({
         database
           .insertTodo(text, notificationid, formattedDate)
           .then(() => {
-            Toast.show('Reminder added',toastconfig);
+            Toast.show('Reminder added',toastConfig);
             activateRefresh((value) => value + 1);
             setText("");
           });
@@ -139,11 +139,11 @@ export default function TabOneScreen({
    //todo insert
    const submitTodo = () => {
     if (text.length === 0) {
-      Toast.show('Type something in the input to set it as a To-do',toastconfig);
+      Toast.show('Type something in the input to set it as a To-do',toastConfig);
       return;
     }
     database.insertTodo(text, null, null).then(() => {
-      Toast.show('Todo added',toastconfig);
+      Toast.show('Todo added',toastConfig);
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
       setText("");
     });
@@ -151,7 +151,7 @@ export default function TabOneScreen({
 
   const showMode = (currentMode: any) => {
     if (text.length === 0) {
-      Toast.show('Type something first to set it as a Reminder',toastconfig);
+      Toast.show('Type something first to set it as a Reminder',toastConfig);
       return;
     }
     setShow(true);

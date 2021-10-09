@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Ionicons } from '@expo/vector-icons'; 
 import {
   ScrollView,
   TextInput,
@@ -21,31 +22,38 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import Toast from "react-native-root-toast";
-import { toastconfig } from "../constants/ToastConfig";
+import { toastConfig } from "../constants/ToastConfig";
 import { horizon } from "../constants/Colors";
 
 export default function TabTwoScreen({
   navigation,
 }: RootTabScreenProps<"JournalTab">) {
   const colorScheme = useColorScheme();
+  let colorValue = 255;
   const dimensions = useWindowDimensions();
   const [textContent, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const top = useSharedValue(dimensions.height);
+  const [filter, setFilter] = useState(false);
   const [refresh, activateRefresh] = useState(0);
   const [entries, setEntries] = useState<Array<entryObject>>([]);
+  const [searchText, setSearch] = useState('');
   const [tempId, setTempId] = useState(0); //sqlite ids start at 1, so zero should be nothing
   interface entryObject {
     id: number;
     title: string;
     content: string;
+    created_on: string;
   }
 
   React.useEffect(() => {
     //data loading effect
-    database.getEntries().then((entryResults) => {
-      setEntries(entryResults);
-    });
+    console.log('effect started, filter is currently: ' + filter);
+    if(!filter){
+      database.getEntries().then((entryResults) => {
+        setEntries(entryResults);
+      });
+    }
     setTempId(0);
   }, [refresh]);
 
@@ -57,6 +65,9 @@ export default function TabTwoScreen({
     stiffness: 500,
   };
 
+  const colourMap = {
+      
+  }
   const sheetStyle = useAnimatedStyle(() => {
     return {
       top: withSpring(top.value, SpringConfig),
@@ -120,7 +131,7 @@ export default function TabTwoScreen({
 
   const removeEntry = (id: number) => {
     database.removeEntry(id).then(() => {
-      Toast.show("Entry Removed", toastconfig);
+      Toast.show("Entry Removed", toastConfig);
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
     });
   };
@@ -132,24 +143,76 @@ export default function TabTwoScreen({
   const insertJournalEntry = () => {
     database.insertEntry(title, textContent).then(() => {
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
-      Toast.show("Entry Created", toastconfig);
+      Toast.show("Entry Created", toastConfig);
       setTitle("");
       setContent("");
     });
   };
   const updateJournalEntry = (id: number) => {
     database.updateEntry(title, textContent, id).then(() => {
+      if(filter){//if the filter is on, then we should refresh that filter in case the update changed the contents
+        database.getSearchResults(searchText).then((searchResults) => {
+          setEntries(searchResults);
+      });
+    }
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
-      Toast.show("Entry Updated", toastconfig);
+      Toast.show("Entry Updated", toastConfig);
       setTitle("");
       setContent("");
+    });
+  };
+  const searchEntries = () => {
+    if(filter){//if filter is true, then that means this should function as a cancel button
+      setFilter(false);
+      setSearch('');
+      activateRefresh((value) => (value > 1000 ? 0 : value + 1));
+      return;
+    }
+    if(searchText == ''){
+      Toast.show('The input needs text to filter by!', toastConfig);
+      return;
+    }
+    database.getSearchResults(searchText).then((searchResults) => {
+      setEntries(searchResults);
+      setFilter(true); //filter is on
+      activateRefresh((value) => (value > 1000 ? 0 : value + 1));
+      Toast.show("entries filtered", toastConfig);
     });
   };
 
   return (
     <View style={styles.container}>
+       <View style={styles.flexRow}>
+        <TextInput
+          onChangeText={(text) => setSearch(text)}
+          placeholder="filter by keywords"
+          style={styles.searchInput}
+          value={searchText}
+        />
+         <Pressable
+          style={({ pressed }) => [
+            {
+              opacity: pressed ? 0.5 : 1,
+            },
+            styles.searchButton,
+          ]}
+          onPress={searchEntries}
+        >
+          <LinearGradient
+            colors={[horizon.darkGray, horizon.mediumGray]}
+            style={styles.searchButtonGradient}
+          >
+            {!filter ? 
+            <Ionicons name="filter" size={24} color="white" />
+          :
+          <Ionicons name="close" size={24} color="white" />
+          }
+          </LinearGradient>
+        </Pressable>
+      </View>
       <ScrollView style={styles.scrollContainer}>
-        {entries.map(({ id, title, content }) => (
+        {
+        entries.map(({ id, title, content, created_on }) => (
           <Pressable
             key={`entry-${id}`}
             onPress={() => {
@@ -172,6 +235,7 @@ export default function TabTwoScreen({
               style={styles.entryGradient}
             >
               <Text style={styles.textStyle}>{title}</Text>
+              <Text style={styles.textStyle}>{created_on}</Text>
             </LinearGradient>
           </Pressable>
         ))}
@@ -181,6 +245,7 @@ export default function TabTwoScreen({
         <Pressable
           onPress={() => {
             setupEntryDetails("", "");
+            setTempId(0);
             openSheet();
           }}
           style={({ pressed }) => [
@@ -288,6 +353,15 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flex: 1,
   },
+  searchInput: {
+    flex: 0,
+    textAlign: "center",
+    height: 48,
+    padding: 8,
+    width: '75%',
+    backgroundColor: "#FCF5E5",
+   
+  },
   separator: {
     borderTopColor: "#ffcba4",
     borderTopWidth: 1,
@@ -359,6 +433,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#232530",
   },
   button1: {
+    flex: 1,
+  },
+  searchButtonGradient: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 12,
+  },
+  searchButton:{
     flex: 1,
   },
   buttonFinalize: {
