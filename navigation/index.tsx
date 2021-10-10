@@ -61,12 +61,14 @@ function BottomTabNavigator() {
       initialRouteName="TodoTab"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarShowLabel: false,
       }}>
       <BottomTab.Screen
         name="TodoTab"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TodoTab'>) => ({
-          title: 'To-do List',
+          headerTintColor: "#FAC29A",
+          title: "To-Do List",
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         })}
       />
@@ -74,7 +76,8 @@ function BottomTabNavigator() {
         name="JournalTab"
         component={TabTwoScreen}
         options={{
-          title: 'Journal',
+          headerTintColor: "#FAC29A",
+          title: 'Notes',
           tabBarIcon: ({ color }) => <TabBarIcon name="journal-outline" color={color} />,
         }}
       />
@@ -82,6 +85,7 @@ function BottomTabNavigator() {
         name="PhotoTab"
         component={TabThreeScreen}
         options={{
+          headerTintColor: "#FAC29A",
           title: 'References',
           tabBarIcon: ({ color }) => <TabBarIcon name="images-outline" color={color} />,
         }}
