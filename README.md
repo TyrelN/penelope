@@ -17,7 +17,7 @@ A tab for typing in items for a to-do list which can be added and just as easily
 This tab is for jotting down notes and thoughts you would like to keep and be able to find later. You can filter your notes by keywords and phrases to more efficiently find them over time.
 
 ### References
-References is a tab for finding pictures queried from the [picsum](https://picsum.photos/) api that can be viewed via pinch-zooming and pan transforms when selected. This tab was designed with artists in mind as a reference tool, but could be helpful for other forms of inspiration as well.
+References is a tab for finding pictures queried from the [picsum](https://picsum.photos/) api that can be viewed via pinch-zooming and pan transforms when selected.
 
 
 
