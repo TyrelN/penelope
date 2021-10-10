@@ -1,4 +1,3 @@
-//reference: https://www.jsparling.com/using-hooks-and-context-with-sqlite-for-expo-in-react-native/
 import React, { useEffect } from "react";
 
 import { database } from "../components/Database";

@@ -1,5 +1,4 @@
-//reference: https://www.naroju.com/how-to-use-react-context-to-pass-database-reference-to-child-components/
-//refrence for versioning: http://www.embusinessproducts.com/react-native-sqlite-database-upgrade-strategy/
+
 import React, { useReducer, useState } from "react";
 import Constants from "expo-constants";
 import { Platform } from "react-native";
