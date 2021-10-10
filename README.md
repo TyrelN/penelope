@@ -9,7 +9,7 @@ Try out the application [here](https://expo.dev/@tyreln/penelope-creative-assist
 
 Penelope comes with three tabs each encompassing a feature:
 
-### To-Do List and Reminders:
+### Reminders:
 A tab for setting to-do list items and reminders. To-do list items are just that, and for more time-sensitive cases, you can set your to-do item as a reminder, which allows you to attach a date to it and schedule a notification for the date and time selected.
 
 
@@ -28,6 +28,12 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 - [ ] allow notes to be filtered by date (entries before or after a date, or on a certain date)
 - [ ] color-code note entries (by some quantifiable metric such as day of the month)
 - [ ] allow swiping to delete items in the To-do and Notes tabs
+
+## Additional Notes:
+* Penelope has only been tested on android thus far. Additional testing on ios needed.
+* Notes and To-Do entries can be deleted by tap-holding them.
+* The Penelope logo was designed by Tyrel Narciso. All rights reserved.
+
 ## References and Resources
 * https://itnext.io/using-sqlite-in-expo-for-offline-react-native-apps-a408d30458c3
 * https://www.youtube.com/watch?v=Xp0q8ZDOeyE
@@ -36,10 +42,5 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 * http://www.embusinessproducts.com/react-native-sqlite-database-upgrade-strategy/
 * https://www.naroju.com/how-to-use-react-context-to-pass-database-reference-to-child-components/
 * https://www.jsparling.com/using-hooks-and-context-with-sqlite-for-expo-in-react-native/
-
-### Additional Notes:
-* Penelope has only been tested on android thus far. Additional testing on ios needed.
-* Notes and To-Do entries can be deleted by tap-holding them.
-* The Penelope logo was designed by Tyrel Narciso. All rights reserved.
 
 
