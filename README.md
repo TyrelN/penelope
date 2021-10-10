@@ -17,7 +17,7 @@ A tab for setting to-do list items and reminders. To-do list items are just that
 This tab is for jotting down notes and thoughts you would like to keep and be able to find later. You can filter your notes by keywords and phrases to more efficiently find them over time.
 
 ### References
-References is a tab for finding pictures queried from the [picsum](https://picsum.photos/) api that can be viewed via pinch-zooming and pan transforms when selected.
+A gallery of images queried from the [picsum](https://picsum.photos/) api that can be selected to load a larger version of an image that can be scaled via two-touch pinching and one-touch panned.
 
 
 
