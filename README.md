@@ -2,7 +2,7 @@
 <div align="center"><img src="https://github.com/TyrelN/penelope/blob/main/assets/images/penelope-logo.png" width="300"/></div><br>
 
 ## About
-Penelope is an organization app built using React Native and Expo. Penelope has various features that aim to help daydreamers keep their lives organized with little effort so that they can keep their head in the clouds.
+Penelope is an organization app built using React Native and Expo. Penelope has various features that aim to help daydreamers keep their lives organized, their thoughts archived, and inspiration quickly accessible.
 
 Try out the application [here](https://expo.dev/@tyreln/penelope-creative-assistant).
 ## Features
