@@ -3,6 +3,8 @@
 
 ## About
 Penelope is an organization app built using React Native and Expo. Penelope has various features that aim to help daydreamers keep their lives organized with little effort so that they can keep their head in the clouds.
+
+Try out the application [here](https://expo.dev/@tyreln/penelope-creative-assistant).
 ## Features
 
 Penelope comes with three tabs each encompassing a feature:
