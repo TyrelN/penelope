@@ -2,7 +2,7 @@
 <div align="center"><img src="https://github.com/TyrelN/penelope/blob/main/assets/images/penelope-logo.png" width="300"/></div><br>
 
 ## About
-Penelope is an organization app built for ios and android with creatives in mind. Penelope has various features that aim to help daydreamers keep their lives organized with little effort so that they can keep their head in the clouds.
+Penelope is an organization app built using React Native and Expo. Penelope has various features that aim to help daydreamers keep their lives organized with little effort so that they can keep their head in the clouds.
 ## Features
 
 Penelope comes with three tabs each encompassing a feature:
@@ -22,7 +22,7 @@ References is a tab for finding pictures queried from the [picsum](https://picsu
 ## Roadmap for Version 2.0
 There are some fundamental improvements planned for 2.0 of Penelope, primarily involving the Notes and References tabs:
 
-- [ ] utilize the [Unsplash API](https://source.unsplash.com/) for timed reference drawings and searching up images with queries
+- [ ] utilize the [Unsplash API](https://source.unsplash.com/) for timed reference drawings and querying images which can then be multi-selected for a mini-moodboard view.
 - [ ] allow notes to be filtered by date (entries before or after a date, or on a certain date)
 - [ ] color-code note entries (by some quantifiable metric such as day of the month)
 - [ ] allow swiping to delete items in the To-do and Notes tabs
