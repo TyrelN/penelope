@@ -68,7 +68,7 @@ function BottomTabNavigator() {
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TodoTab'>) => ({
           headerTintColor: "#FAC29A",
-          title: "To-Do List",
+          title: "Reminders",
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         })}
       />
