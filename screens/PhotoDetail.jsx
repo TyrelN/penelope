@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useRef, useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -7,7 +6,6 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { formatPhotoUri } from "../components/Picsum";
-import { Text, View } from "../components/Themed";
 import Animated, {
   useAnimatedGestureHandler,
   useSharedValue,
@@ -21,8 +19,8 @@ import {
 
 export default function PhotoDetailScreen({ route, navigation }) {
   const { height, width } = useWindowDimensions();
-  const { photo } = route.params;
-  const ratio = PixelRatio.getPixelSizeForLayoutSize(width);
+  const { photoId } = route.params;
+ // const ratio = PixelRatio.getPixelSizeForLayoutSize(width);
   const scale = useSharedValue(1);
   const focalX = useSharedValue(0);
   const focalY = useSharedValue(0);
@@ -31,9 +29,9 @@ export default function PhotoDetailScreen({ route, navigation }) {
   const [photoData, setData] = useState({});
   const AnimatedImage = Animated.createAnimatedComponent(Image);
 
-  const fetchPhotoDetails = async () => {
+  const fetchPhotoDetails = async () => {//set the photo details given by the route parameter id
     try {
-      const response = await fetch(`https://picsum.photos/id/${photo}/info`);
+      const response = await fetch(`https://picsum.photos/id/${photoId}/info`);
       const photoDetails = await response.json();
       setData(photoDetails);
     } catch (error) {
@@ -47,22 +45,24 @@ export default function PhotoDetailScreen({ route, navigation }) {
 
   const pinchHandler = useAnimatedGestureHandler({
     onStart: (event, context) => {
+      //context allows current scale to be factored in during onActive
       context.startScale = scale.value;
     },
     onActive: (event, context) => {
-      scale.value = context.startScale * event.scale;
-      if (context.startScale < 2) {
+      scale.value = context.startScale * event.scale;//scale relative to the current scale
+      if (context.startScale < 2) { //only allow focused transforms if the image isn't zoomed in by more than 2 x
         focalX.value = event.focalX;
         focalY.value = event.focalY;
       }
     },
     onEnd: (event, context) => {
+      //resize the image back to normal if at a small enough scale after pinch
       if (scale.value < 0.9) {
         scale.value = withTiming(1);
       }
     },
   });
-
+  //events that cover handling one touch panning
   const panHandler = useAnimatedGestureHandler({
     onStart: (event, context) => {
       context.startX = panX.value;
@@ -78,7 +78,7 @@ export default function PhotoDetailScreen({ route, navigation }) {
       }
     },
   });
-
+  //the logic for actually tranforming the image based on shared Values
   const imageAnimStyle = useAnimatedStyle(() => {
     return {
       transform: [

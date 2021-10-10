@@ -31,18 +31,19 @@ Notifications.setNotificationHandler({
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<"TodoTab">) {
-  interface queryObject {
+  interface queryObject {//a query object that each result from the database will be placed into
     id: number;
     todoname: string;
     notificationid: string;
     reminderdate: string;
   }
-  const colorScheme = useColorScheme();
+  //const colorScheme = useColorScheme();
   const [todos, setTodos] = useState<Array<queryObject>>([]);
   const [reminders, setReminders] = useState<Array<queryObject>>([]);
   const [refresh, activateRefresh] = useState(0);
   const [text, setText] = useState("");
 
+  //effect that runs every time the refresh variable is changed, and at the first component render
   React.useEffect(() => {
     //data loading effect
     database.getReminders().then((reminderResults) => {
@@ -59,6 +60,7 @@ export default function TabOneScreen({
     const resultInSeconds = Math.floor(
       (currentDate.getTime() - Date.now()) / 1000
     );
+    //schedule the notification and store the id in this variable
     const notificationId = Notifications.scheduleNotificationAsync({
       content: {
         title: "Here is your scheduled reminder: ",
@@ -67,10 +69,9 @@ export default function TabOneScreen({
       },
       trigger,
     });
-    console.log("notification scheduled! returning notify id");
     return notificationId;
   };
-
+  //on long press, trigger an alert to confirm deletion
   const deleteAlert = (id: number, notificationId = "") => {
     Alert.alert(
       "Delete",
@@ -84,10 +85,9 @@ export default function TabOneScreen({
         {
           text: "Delete",
           onPress: () => {
-            if (notificationId.length > 0) {
+            if (notificationId.length > 0) {//if there is a notification id for this item, also cancel that notification
               Notifications.cancelScheduledNotificationAsync(notificationId);
             }
-
             removeItem(id);
           },
         },
@@ -95,7 +95,7 @@ export default function TabOneScreen({
       { cancelable: false }
     );
   };
-
+  //function that calls database to remove item
   const removeItem = (id: number) => {
     database.removeItem(id).then(() => {
       Toast.show('Todo removed',toastConfig);

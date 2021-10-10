@@ -2,8 +2,8 @@
 import React, { useReducer, useState } from "react";
 import Constants from "expo-constants";
 import { Platform } from "react-native";
-//import connect, {sql} from '@databases/expo';
 import * as SQLite from "expo-sqlite";
+//initialize database if not on the web
 function openDatabase() {
   if (Platform.OS === "web") {
     return {
@@ -20,6 +20,7 @@ function openDatabase() {
 
 const db = openDatabase();
 
+//setup the table schema for notes and reminders
 const setupTables = async () => {
   return new Promise((resolve) => {
     db.transaction(
@@ -38,7 +39,7 @@ const setupTables = async () => {
       },
       null,
       () => {
-        resolve("the tables promise worked");
+        resolve("the tables promise worked");//called when the queries have successfully completed
       }
     );
   });
@@ -62,7 +63,7 @@ const dropTables = async () => {
     );
   });
 };
-
+//versioning schema to allow for updates to the database over time
 const setupVersions = async () => {
   let currentVersion = 0; //pre release version is 0
   return new Promise((resolve, reject) => {
@@ -95,7 +96,7 @@ const setupVersions = async () => {
     );
   });
 };
-
+//notificationid and reminderdate will be null if the item is not a reminder
 const insertTodo = (todoname, notificationid, reminderdate) => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -115,8 +116,9 @@ const insertTodo = (todoname, notificationid, reminderdate) => {
     );
   });
 };
-
+//insert Notes entry with title content and generated date
 const insertEntry = (title, content) => {
+  // new Date() returns the current date
   const created_on = new Date().toDateString();
   console.log(created_on);
   return new Promise((resolve, reject) => {
@@ -137,7 +139,7 @@ const insertEntry = (title, content) => {
     );
   });
 };
-
+//updates the entry queried using the selected id
 const updateEntry = (title, content, id) => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -155,7 +157,7 @@ const updateEntry = (title, content, id) => {
     );
   });
 };
-
+// return the items where there is a notification id
 const getReminders = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -173,7 +175,7 @@ const getReminders = async () => {
     );
   });
 };
-
+//return all entries
 const getEntries = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -191,7 +193,7 @@ const getEntries = async () => {
     );
   });
 };
-
+//return all items where there is no notification id
 const getTodos = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -209,7 +211,7 @@ const getTodos = async () => {
     );
   });
 };
-
+//return all entries containing the keyword string
 const getSearchResults = async (keyString) => {
   console.log('search query function using ' + keyString);
   return new Promise((resolve, reject) => {
@@ -228,7 +230,7 @@ const getSearchResults = async (keyString) => {
     );
   });
 };
-
+//works for both types of items in Reminders
 const removeItem = async (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -242,7 +244,7 @@ const removeItem = async (id) => {
     );
   });
 };
-
+//removes any notes entry
 const removeEntry = async (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -256,7 +258,7 @@ const removeEntry = async (id) => {
     );
   });
 };
-
+//export the functions for use in other files
 export const database = {
   insertTodo,
   getReminders,

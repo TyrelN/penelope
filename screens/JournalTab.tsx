@@ -39,13 +39,13 @@ export default function TabTwoScreen({
   const [entries, setEntries] = useState<Array<entryObject>>([]);
   const [searchText, setSearch] = useState('');
   const [tempId, setTempId] = useState(0); //sqlite ids start at 1, so zero should be nothing
-  interface entryObject {
+  interface entryObject {//query object to hold entries retrived from database result sets
     id: number;
     title: string;
     content: string;
     created_on: string;
   }
-
+  //effect called on refresh or first component render
   React.useEffect(() => {
     //data loading effect
     console.log('effect started, filter is currently: ' + filter);
@@ -56,7 +56,7 @@ export default function TabTwoScreen({
     }
     setTempId(0);
   }, [refresh]);
-
+  //configuration for bottom sheet animation
   const SpringConfig = {
     damping: 80,
     overshootClamping: true,
@@ -64,10 +64,11 @@ export default function TabTwoScreen({
     restSpeedThreshold: 0.1,
     stiffness: 500,
   };
-
-  const colourMap = {
+  //TODO: map a colour to each entry for color-coding
+  // const colourMap = {
       
-  }
+  // }
+  //top is the current height of the sheet
   const sheetStyle = useAnimatedStyle(() => {
     return {
       top: withSpring(top.value, SpringConfig),
@@ -81,15 +82,18 @@ export default function TabTwoScreen({
       top.value = context.startTop + event.translationY;
     },
     onEnd() {
+      //dimensions.height / 4 equates to halfway up the screen on android
       const baseHeight = dimensions.height / 4;
       const upperHeightLimit = baseHeight + 150;
       const lowerHeightLimit = baseHeight - 60;
+      //if the top value is close to the middle
       if (top.value <= upperHeightLimit && top.value >= lowerHeightLimit) {
         top.value = dimensions.height / 4; //hides sheet
       } else if (top.value < upperHeightLimit) {
+        //at 0, the bottom sheet is full screen
         top.value = 0;
       } else {
-        // the drag height must be h
+        //close the sheet
         top.value = dimensions.height;
       }
     },
@@ -103,11 +107,11 @@ export default function TabTwoScreen({
   };
   const closeSheet = () => {
     top.value = withSpring(
-      dimensions.height, //half of screen
+      dimensions.height, //none of the screen
       SpringConfig
     );
   };
-
+  //alert called when about to delete
   const deleteAlert = (id: number, notificationId = "") => {
     Alert.alert(
       "Delete",
@@ -128,18 +132,19 @@ export default function TabTwoScreen({
       { cancelable: false }
     );
   };
-
+  //function calling database query then refreshing entries
   const removeEntry = (id: number) => {
     database.removeEntry(id).then(() => {
       Toast.show("Entry Removed", toastConfig);
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
     });
   };
+  //helper function for setting content and title during different events
   const setupEntryDetails = (title: string, content: string) => {
     setContent(content);
     setTitle(title);
   };
-
+  //insert notes item
   const insertJournalEntry = () => {
     database.insertEntry(title, textContent).then(() => {
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));
@@ -148,6 +153,7 @@ export default function TabTwoScreen({
       setContent("");
     });
   };
+  //updates notes when text changes and finalize is pressed
   const updateJournalEntry = (id: number) => {
     database.updateEntry(title, textContent, id).then(() => {
       if(filter){//if the filter is on, then we should refresh that filter in case the update changed the contents
@@ -162,7 +168,7 @@ export default function TabTwoScreen({
     });
   };
   const searchEntries = () => {
-    if(filter){//if filter is true, then that means this should function as a cancel button
+    if(filter){//if filter is true, then this should function as a cancel button
       setFilter(false);
       setSearch('');
       activateRefresh((value) => (value > 1000 ? 0 : value + 1));

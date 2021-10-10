@@ -1,14 +1,14 @@
 import React from 'react'
-import { TouchableOpacity, Dimensions, FlatList, Image, PixelRatio, Alert, Pressable, Touchable} from 'react-native'
+import { TouchableOpacity, Dimensions, FlatList, Image} from 'react-native'
 
 
 import { formatPhotoUri } from './Picsum'
-
+//navigation parameter imported so that a selected image can route to a new page with parameters
 export default function PhotoGrid({ photos, numColumns, onEndReached, navigation}) {
   const { width } = Dimensions.get('window')
  
-  const size = width / numColumns
-//TODO: use PixelRatio to fetch appropriately sized images per screen
+  const size = width / numColumns 
+  //The component that renders the flatlist 
   return (
     <FlatList
       data={photos}
@@ -19,6 +19,7 @@ export default function PhotoGrid({ photos, numColumns, onEndReached, navigation
        <TouchableOpacity
        onPress={()=>{
         const itemId = item.id;
+        //send the image id to a dedicated screen
         navigation.navigate('PhotoDetail', {photo: item.id})
        }}
        >
