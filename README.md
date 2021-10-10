@@ -10,7 +10,7 @@ Try out the application [here](https://expo.dev/@tyreln/penelope-creative-assist
 Penelope comes with three tabs each encompassing a feature:
 
 ### To-Do List and Reminders:
-A tab for typing in items for a to-do list which can be added and just as easily deleted. For more time-sensitive cases, you can set your to-do item as a reminder, which allows you to attach a date to it and schedule a notification for the date and time selected.
+A tab for setting to-do list items and reminders. To-do list items are just that, and for more time-sensitive cases, you can set your to-do item as a reminder, which allows you to attach a date to it and schedule a notification for the date and time selected.
 
 
 ### Notes
@@ -39,6 +39,7 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 
 ### Additional Notes:
 * Penelope has only been tested on android thus far. Additional testing on ios needed.
+* Notes and To-Do entries can be deleted tapping and holding them.
 * The Penelope logo was designed by Tyrel Narciso. All rights reserved.
 
 
