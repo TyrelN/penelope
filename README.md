@@ -7,7 +7,7 @@ Penelope is an organization app built for ios and android with creatives in mind
 
 Penelope comes with three tabs each encompassing a feature:
 
-### To-do list and Reminders:
+### To-Do List and Reminders:
 A tab for typing in items for a to-do list which can be added and just as easily deleted. For more time-sensitive cases, you can set your to-do item as a reminder, which allows you to attach a date to it and schedule a notification for the date and time selected.
 
 
@@ -19,7 +19,7 @@ References is a tab for finding pictures queried from the [picsum](https://picsu
 
 
 
-## Roadmap for version 2.0
+## Roadmap for Version 2.0
 There are some fundamental improvements planned for 2.0 of Penelope, primarily involving the Notes and References tabs:
 
 - [ ] utilize the [Unsplash API](https://source.unsplash.com/) for timed reference drawings and searching up images with queries
