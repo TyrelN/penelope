@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import {
   StyleSheet,
   Image,
-  PixelRatio,
   useWindowDimensions,
 } from "react-native";
 import { formatPhotoUri } from "../components/Picsum";
@@ -19,7 +18,7 @@ import {
 
 export default function PhotoDetailScreen({ route, navigation }) {
   const { height, width } = useWindowDimensions();
-  const { photoId } = route.params;
+  const { photo } = route.params;
  // const ratio = PixelRatio.getPixelSizeForLayoutSize(width);
   const scale = useSharedValue(1);
   const focalX = useSharedValue(0);
@@ -31,7 +30,7 @@ export default function PhotoDetailScreen({ route, navigation }) {
 
   const fetchPhotoDetails = async () => {//set the photo details given by the route parameter id
     try {
-      const response = await fetch(`https://picsum.photos/id/${photoId}/info`);
+      const response = await fetch(`https://picsum.photos/id/${photo}/info`);
       const photoDetails = await response.json();
       setData(photoDetails);
     } catch (error) {
