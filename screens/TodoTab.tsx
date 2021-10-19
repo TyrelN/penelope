@@ -131,6 +131,7 @@ export default function TabOneScreen({
             Toast.show('Reminder added',toastConfig);
             activateRefresh((value) => value + 1);
             setText("");
+            setShow(false);
           });
       });
     }
