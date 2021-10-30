@@ -28,6 +28,7 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 - [ ] allow notes to be filtered by date (entries before or after a date, or on a certain date)
 - [ ] color-code note entries (by some quantifiable metric such as day of the month)
 - [ ] allow swiping to delete items in the To-do and Notes tabs
+- [ ] allow for repeated reminders on presets (weekly/monthly)
 
 ## Additional Notes:
 * Penelope has only been tested on android thus far. Additional testing on ios needed.
