@@ -2,7 +2,7 @@
 <div align="center"><img src="https://github.com/TyrelN/penelope/blob/main/assets/images/penelope-logo.png" width="300"/></div><br>
 
 ## About
-Penelope is an organization app built using React Native and Expo. Penelope has various features that aim to help daydreamers keep their lives organized, their thoughts archived, and inspiration quickly accessible.
+Penelope is an organization app built using React Native and Expo. Penelope has various features that aim to help artists keep their lives organized, their thoughts archived, and reference quickly accessible.
 
 Try out the application [here](https://expo.dev/@tyreln/penelope-creative-assistant).
 ## Features
@@ -31,7 +31,6 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 - [ ] allow for repeated reminders on presets (weekly/monthly)
 
 ## Additional Notes:
-* Penelope has only been tested on android thus far. Additional testing on ios needed.
 * Notes and To-Do entries can be deleted by tap-holding them.
 * The Penelope logo was designed by Tyrel Narciso. All rights reserved.
 
