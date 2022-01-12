@@ -32,7 +32,7 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 
 ## Additional Notes:
 * The ios version has various bugs that need to be fixed. The app was tested solely on android; issues with the ios version weren't discovered until recently.
-* Notes and To-Do entries can be deleted by tap-holding them.
+* Notes and To-Do entries can be deleted by tap and holding them.
 * The Penelope logo was designed by Tyrel Narciso. All rights reserved.
 
 ## References and Resources
