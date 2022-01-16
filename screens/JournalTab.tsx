@@ -48,7 +48,6 @@ export default function TabTwoScreen({
   //effect called on refresh or first component render
   React.useEffect(() => {
     //data loading effect
-    console.log('effect started, filter is currently: ' + filter);
     if(!filter){
       database.getEntries().then((entryResults) => {
         setEntries(entryResults);
@@ -119,7 +118,6 @@ export default function TabTwoScreen({
       [
         {
           text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {

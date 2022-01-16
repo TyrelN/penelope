@@ -73,7 +73,6 @@ export default function TabOneScreen({
     const resultInSeconds = Math.floor(
       (currentDate.getTime() - Date.now()) / 1000
     );
-    console.log("results in seconds: " + resultInSeconds)
     //schedule the notification and store the id in this variable
     const notificationId = Notifications.scheduleNotificationAsync({
       content: {
@@ -95,7 +94,6 @@ export default function TabOneScreen({
       [
         {
           text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
           style: "cancel",
         },
         {
@@ -127,7 +125,6 @@ export default function TabOneScreen({
 
   const updateDate = (event: any, selectedDate: any) =>{
     setDate(selectedDate || date);
-    console.log(date.toString());
     if(Platform.OS == "android"){
       if (mode === "date") {
         showTimePicker();
@@ -137,16 +134,12 @@ export default function TabOneScreen({
     }
   }
   const submitDate = () => {
-    console.log(date.toString());
       if (date.getTime() < Date.now()) {
         Toast.show('the selected date must be some time in the future!', toastConfig);
         return;
       }
-      console.log("submitting")
       const dateSections = date.toString().split(' ' , 5);
       const formattedDate = "Set for: " + dateSections.slice(0,4).join(' ') + " at " + dateSections.slice(4);
-      console.log(date);
-      console.log(date.toString());
       scheduleNotification(date, text).then((notificationid) => {
         database
           .insertTodo(text, notificationid, formattedDate)

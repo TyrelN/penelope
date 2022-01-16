@@ -28,7 +28,6 @@ const setupTables = async () => {
         tx.executeSql(
           `create table if not exists todos (id integer primary key not null, todoname text not null, notificationid text, reminderdate text);`
         );
-        console.log("table setup log");
         tx.executeSql(
           `create table if not exists entries (id integer primary key not null, title text not null, content text not null, created_on text);`
         );
@@ -89,7 +88,7 @@ const setupVersions = async () => {
           }
         );
       },
-      (error) => console.log("there was an error" + error),
+      (error) => console.log(error),
       () => {
         resolve("version setup complete");
       }
@@ -120,7 +119,6 @@ const insertTodo = (todoname, notificationid, reminderdate) => {
 const insertEntry = (title, content) => {
   // new Date() returns the current date
   const created_on = new Date().toDateString();
-  console.log(created_on);
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
@@ -213,7 +211,6 @@ const getTodos = async () => {
 };
 //return all entries containing the keyword string
 const getSearchResults = async (keyString) => {
-  console.log('search query function using ' + keyString);
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
