@@ -1,3 +1,4 @@
+//pinchgesture code reference: https://www.youtube.com/watch?v=R7vyLItMQJw
 import React, { useRef, useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -18,7 +19,7 @@ import {
 
 export default function PhotoDetailScreen({ route, navigation }) {
   const { height, width } = useWindowDimensions();
-  const { photo } = route.params;
+  const { photo } = route.params;//retrieve the passed photo id 
  // const ratio = PixelRatio.getPixelSizeForLayoutSize(width);
   const scale = useSharedValue(1);
   const focalX = useSharedValue(0);

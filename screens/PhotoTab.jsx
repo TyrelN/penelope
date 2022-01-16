@@ -1,3 +1,4 @@
+//photogrid, photo reducer and picsum code reference: https://www.reactnative.express/exercises/photo_gallery
 import React, { useEffect, useReducer, useCallback } from "react";
 import { ActivityIndicator, StyleSheet, Button, Pressable } from "react-native";
 import Colors from "../constants/Colors";

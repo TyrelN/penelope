@@ -265,7 +265,7 @@ export default function TabTwoScreen({
             colors={[horizon.mediumGray, horizon.darkGray]}
             style={styles.buttonGradient}
           >
-            <Text style={{ color: "#FBFAF5" }}>Create New Entry</Text>
+            <Text style={styles.textStyle}>Create New Entry</Text>
           </LinearGradient>
         </Pressable>
       </View>
