@@ -20,6 +20,18 @@ import {horizon} from '../constants/Colors';
 import Toast from 'react-native-root-toast';
 import { toastConfig } from '../constants/ToastConfig';
 
+
+async function requestPermissionsAsync(){
+  return await Notifications.requestPermissionsAsync({
+    ios:{
+      allowAlert: true,
+      allowBadge: true,
+      allowSound: true,
+      allowAnnouncements: true,
+
+    },
+  });
+}
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -45,6 +57,8 @@ export default function TabOneScreen({
 
   //effect that runs every time the refresh variable is changed, and at the first component render
   React.useEffect(() => {
+    //setup permissions for ios
+    requestPermissionsAsync();
     //data loading effect
     database.getReminders().then((reminderResults) => {
       setReminders(reminderResults);
@@ -56,10 +70,10 @@ export default function TabOneScreen({
 
   //notification logic
   const scheduleNotification = async (currentDate: Date, text: string) => {
-    const trigger = currentDate.getTime();
     const resultInSeconds = Math.floor(
       (currentDate.getTime() - Date.now()) / 1000
     );
+    console.log("results in seconds: " + resultInSeconds)
     //schedule the notification and store the id in this variable
     const notificationId = Notifications.scheduleNotificationAsync({
       content: {
@@ -67,7 +81,9 @@ export default function TabOneScreen({
         body: text,
         priority: "high",
       },
-      trigger,
+      trigger:{
+        seconds: resultInSeconds
+      },
     });
     return notificationId;
   };
@@ -108,23 +124,30 @@ export default function TabOneScreen({
   const [mode, setMode] = useState(undefined);
   const [show, setShow] = useState(false);
 
-  const submitDate = (event: any, selectedDate: any) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
-    if (mode === "date") {
-      showTimePicker();
-    } else if (mode === "time") {
-      if (currentDate < Date.now()) {
+
+  const updateDate = (event: any, selectedDate: any) =>{
+    setDate(selectedDate || date);
+    console.log(date.toString());
+    if(Platform.OS == "android"){
+      if (mode === "date") {
+        showTimePicker();
+      } else if (mode === "time") {
+        submitDate();
+      }
+    }
+  }
+  const submitDate = () => {
+    console.log(date.toString());
+      if (date.getTime() < Date.now()) {
         Toast.show('the selected date must be some time in the future!', toastConfig);
         return;
       }
-      const currentDateString = currentDate.toString();
-      const dateSections = currentDateString.split(' ' , 5);
-      const firstSection = dateSections.slice(0, 4);
-      const secondSection = dateSections.slice(4);
-      const formattedDate = "Set for: " + firstSection.join(' ') + " at " + secondSection;
-      scheduleNotification(currentDate, text).then((notificationid) => {
+      console.log("submitting")
+      const dateSections = date.toString().split(' ' , 5);
+      const formattedDate = "Set for: " + dateSections.slice(0,4).join(' ') + " at " + dateSections.slice(4);
+      console.log(date);
+      console.log(date.toString());
+      scheduleNotification(date, text).then((notificationid) => {
         database
           .insertTodo(text, notificationid, formattedDate)
           .then(() => {
@@ -134,7 +157,6 @@ export default function TabOneScreen({
             setShow(false);
           });
       });
-    }
   };
 
    //todo insert
@@ -159,8 +181,10 @@ export default function TabOneScreen({
     setMode(currentMode);
   };
 
-  const showDatepicker = () => {
-    showMode("date");
+  const processDateTimePicking = () => {
+    if(Platform.OS === "ios"){
+      showMode("datetime");
+    }
   };
 
   const showTimePicker = () => {
@@ -202,16 +226,20 @@ export default function TabOneScreen({
             },
             styles.button,
           ]}
-          onPress={() => {
-            showDatepicker();
+          onPress={() => {!show ? 
+            processDateTimePicking()
+            :
+            submitDate();
           }}
         >
           <LinearGradient
             // Button Linear Gradient
             colors={[horizon.darkGray, horizon.mediumGray]}
             style={styles.buttonGradient2}
-          >
-            <Text style={styles.textStyle2}>Set Reminder</Text>
+          >{!show ? 
+            <Text style={styles.textStyle2}>Set Reminder</Text>:
+            <Text style={styles.textStyle2}>Apply</Text>
+          }
           </LinearGradient>
         </Pressable>
       </View>
@@ -221,9 +249,9 @@ export default function TabOneScreen({
           value={date}
           mode={mode}
           is24Hour={true}
-          display="spinner"
+          display="default"
           minimumDate={new Date()}
-          onChange={submitDate}
+          onChange={updateDate}
         >
           <Button onPress={showTimePicker} title="show time"></Button>
         </DateTimePicker>

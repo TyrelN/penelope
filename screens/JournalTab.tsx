@@ -265,7 +265,7 @@ export default function TabTwoScreen({
             colors={[horizon.mediumGray, horizon.darkGray]}
             style={styles.buttonGradient}
           >
-            <Text style={styles.textStyle}>Create New Entry</Text>
+            <Text style={{ color: "#FBFAF5" }}>Create a note</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -428,13 +428,9 @@ const styles = StyleSheet.create({
   },
   buttonGradient: {
     alignItems: "center",
-    justifyContent: "center",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    flex: 1,
     paddingVertical: 30,
-
-    height: 48,
     padding: 8,
     backgroundColor: "#232530",
   },
