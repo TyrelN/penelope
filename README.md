@@ -43,8 +43,15 @@ There are some fundamental improvements planned for 2.0 of Penelope, primarily i
 - [ ] allow swiping to delete items in the To-do and Notes tabs
 - [ ] allow for repeated reminders on presets (weekly/monthly)
 
+
+## Setup:
+After downloading the repository, you can run the project using these commands:<br>
+`npm install --global yarn`<br>
+`yarn install`<br>
+`expo start`<br>
+This will activate Expo and allow you to debug the application using iOS/Android with the [Expo Go](https://expo.dev/client) app.
+
 ## Additional Notes:
-* The ios version has various bugs that need to be fixed. The app was tested solely on android; issues with the ios version weren't discovered until recently.
 * Notes and To-Do entries can be deleted by tap and holding them.
 * The Penelope logo was designed by Tyrel Narciso. All rights reserved.
 
